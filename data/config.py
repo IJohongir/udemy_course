@@ -1,12 +1,12 @@
 import os
-
 from dotenv import load_dotenv
 
 load_dotenv()
 
+path_db = str(os.getenv("PATH_TO_DB"))
 BOT_TOKEN = str(os.getenv("BOT_TOKEN"))
 admins = [
-    362089194
+    557371080,884666206
 ]
 
 ip = os.getenv("ip")

@@ -1,8 +1,6 @@
 import logging
-
 from aiogram import Dispatcher
-
-from data.config import admins
+from udemy_course.data.config import admins
 
 
 async def on_startup_notify(dp: Dispatcher):
