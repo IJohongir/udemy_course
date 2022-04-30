@@ -5,10 +5,10 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from loader import dp, bot
 
-from udemy_course.handlers.users.Tasks import get_tasks, get_Sprint, Task
-from udemy_course.keyboards.default import markupSprint, markupRetro, markupmenu
-from udemy_course.states.Scrum import ReScrum, Retro, Good, Bad, MoodRETRO, Task_done
-from udemy_course.utils.db_api.database import Database
+from handlers.users.Tasks import get_tasks, get_Sprint, Task
+from keyboards.default import markupSprint, markupRetro, markupmenu
+from states.Scrum import ReScrum, Retro, Good, Bad, MoodRETRO, Task_done
+from utils.db_api.database import Database
 from aiogram.types import (
     CallbackQuery,
     InlineKeyboardButton,

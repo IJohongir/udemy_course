@@ -4,9 +4,9 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 from loader import dp, db
-from udemy_course.keyboards.default import markupmenu, markupRetro, markupSprint
-from udemy_course.states import ReScrum
-from udemy_course.utils.db_api import Database
+from keyboards.default import markupmenu, markupRetro, markupSprint
+from states import ReScrum
+from utils.db_api import Database
 
 db = Database()
 @dp.message_handler(Command("menu"))

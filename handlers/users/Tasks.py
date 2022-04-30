@@ -3,11 +3,10 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 from udemy_course.handlers.users.Spirnt import INsprint
-from udemy_course.keyboards.default import markupmenu, markupSprint
-from udemy_course.states.Scrum import ReTasks
-from udemy_course.utils.db_api import Database
+from keyboards.default import markupmenu, markupSprint
+from states.Scrum import ReTasks
+from utils.db_api import Database
 from datetime import datetime
-from aiogram.dispatcher.filters import Command
 
 from loader import dp, bot
 
