@@ -52,7 +52,7 @@ async def admin(message: types.Message):
         await message.answer("У вас нет права админа😬!!!")
 
 
-@dp.message_handler(text='Retro')
+@dp.message_handler(text='Retro(drop)')
 async def Clear_Retro(message: types.Message):
     admin = admins
     user_id = message.from_user.id
@@ -64,7 +64,7 @@ async def Clear_Retro(message: types.Message):
         await message.answer("У вас нет права админа😬!!!")
 
 
-@dp.message_handler(text='Sprint')
+@dp.message_handler(text='Sprint(drop)')
 async def Clear_Retro(message: types.Message):
     admin = admins
     user_id = message.from_user.id
@@ -76,7 +76,7 @@ async def Clear_Retro(message: types.Message):
         await message.answer("У вас нет права админа😬!!!")
 
 
-@dp.message_handler(text='admin')
+@dp.message_handler(text='admin(drop)')
 async def Clear_Retro(message: types.Message):
     admin = admins
     user_id = message.from_user.id
@@ -88,7 +88,7 @@ async def Clear_Retro(message: types.Message):
         await message.answer("У вас нет права админа😬!!!")
 
 
-@dp.message_handler(text='tasks')
+@dp.message_handler(text='tasks(drop)')
 async def Clear_Retro(message: types.Message):
     admin = admins
     user_id = message.from_user.id
@@ -100,7 +100,7 @@ async def Clear_Retro(message: types.Message):
         await message.answer("У вас нет права админа😬!!!")
 
 
-@dp.message_handler(text='users')
+@dp.message_handler(text='users(drop)')
 async def Clear_Retro(message: types.Message):
     admin = admins
     user_id = message.from_user.id
@@ -128,17 +128,60 @@ async def name_task(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=AdminTasks.AT2)
-async def description(message: types.Message, state: FSMContext):
+async def Sprint_id(message: types.Message, state: FSMContext):
     answer = message.text
     await state.update_data(description=answer)
-    data = await state.get_data()
-    name_task = data.get("name_task")
-    description = data.get("description")
-    datae = message.date
-    db.create_table_Tasks()
-    db.add_tasks(name_task, description, datae)
-    await message.answer("Процец успешно сделан*", reply_markup=markupAdmin)
-    await state.reset_state()
+    sprints = get_Sprint()
+
+    for task in sprints:
+        mainMenu2 = InlineKeyboardMarkup(row_width=1)
+        mainMenu2.insert(
+            InlineKeyboardButton(text=f"{task.name_sprint}", callback_data="Sprint-" + str(task.id))
+        )
+        await message.answer(
+            f"Выбариты : {task.name_sprint}",
+            reply_markup=mainMenu2
+        )
+    await AdminTasks.AT3.set()
+
+
+@dp.callback_query_handler(text_contains="Sprint-", state=AdminTasks.AT3)
+async def spirnget(call: CallbackQuery, state: FSMContext):
+    # Обязательно сразу сделать answer, чтобы убрать "часики" после нажатия на кнопку.
+    # Укажем cache_time, чтобы бот не получал какое-то время апдейты, тогда нижний код не будет выполняться.
+    await call.answer(cache_time=20)
+    await bot.delete_message(call.from_user.id, call.message.message_id)
+    if call.data[0:7] == "Sprint-":
+        id = call.data.split("-")
+        await state.update_data(id_Sprint=id)
+
+    else:
+        pass
+
+    await call.message.answer("Успешьно закриплено✔️✔️✔️")
+    await AdminTasks.AT4.set()
+    await call.message.answer("Зарегат задачу да/нет")
+
+
+@dp.message_handler(state=AdminTasks.AT4)
+async def description(message: types.Message, state: FSMContext):
+    answer = message.text
+    if answer == 'да':
+        data = await state.get_data()
+        name_task = data.get("name_task")
+        description = data.get("description")
+        sprint_array = data.get("id_Sprint")
+        id_sprint = int(sprint_array[1])
+        datae = message.date
+        db.create_table_Tasks()
+        db.add_tasks(name_task, description, datae, id_sprint)
+        await message.answer("Процесс успешно сделан", reply_markup=markupAdmin)
+        await state.reset_state()
+    elif answer == 'нет':
+        await message.answer("задача отменён")
+    else:
+        await message.answer("ответьте 'да' или 'нет' ")
+        await AdminTasks.AT4.set()
 
 
 @dp.message_handler(text="Добавить id:")
@@ -174,7 +217,7 @@ async def get_tasks(message: types.Message):
 
     for user in users:
         await message.answer(
-            f"<b>все данные  </b>\n<b>id :</b>{user.id}\n<b>Имя :</b>{user.first_name} \n<b>Фамиля :</b>{user.last_name} \n<b>Телефон номер:</b>{user.phone_number} \n<b>Электронный почта :</b>{user.email} "
+            f"<b>все данные  </b>\n<b>id :  </b>{user.id}\n<b>Имя : </b>{user.first_name} \n<b>Фамиля : </b>{user.last_name} \n<b>Телефон номер:    </b>{user.phone_number} \n<b>Электронный почта :    </b>{user.email} "
         )
 
 

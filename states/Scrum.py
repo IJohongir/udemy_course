@@ -23,6 +23,8 @@ class IDAdmin(StatesGroup):
 class AdminTasks(StatesGroup):
     AT1 = State()
     AT2 = State()
+    AT3 = State()
+    AT4 = State()
 
 
 class Sprint(StatesGroup):

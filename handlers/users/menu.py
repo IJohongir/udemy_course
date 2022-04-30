@@ -6,8 +6,9 @@ from aiogram.types import ReplyKeyboardRemove
 from loader import dp, db
 from udemy_course.keyboards.default import markupmenu, markupRetro, markupSprint
 from udemy_course.states import ReScrum
+from udemy_course.utils.db_api import Database
 
-
+db = Database()
 @dp.message_handler(Command("menu"))
 async def show_menu(message: types.Message):
     users = db.select_all_tg_id()
@@ -35,6 +36,7 @@ async def show_menu(message: types.Message):
 
 @dp.message_handler(text="Sprint")
 async def get_Sprint2(message: types.Message):
+    db.create_table_Sprint()
     await message.answer("📅", reply_markup=markupSprint)
 
 

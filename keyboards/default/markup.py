@@ -47,10 +47,10 @@ markupAdmin = ReplyKeyboardMarkup(
 markupDropTable = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton('Retro'), KeyboardButton('Sprint'), KeyboardButton('admin'),
+            KeyboardButton('Retro(drop)'), KeyboardButton('Sprint(drop)'), KeyboardButton('admin(drop)'),
 
         ],
         [
-            KeyboardButton('tasks'), KeyboardButton('users')
+            KeyboardButton('tasks(drop)'), KeyboardButton('users(drop)')
         ]
     ], resize_keyboard=True)
