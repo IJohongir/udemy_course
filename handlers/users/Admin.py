@@ -7,7 +7,7 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from loader import dp, bot
 
-from udemy_course.states import AdminTasks, IDAdmin, Sprint, getRetro
+from states import AdminTasks, IDAdmin, Sprint, getRetro
 from udemy_course.utils.db_api import Database
 from udemy_course.keyboards.default.markup import markupAdmin, markupDropTable
 from .Tasks import Task, get_tasks_admin as get_tasks_from_db, get_Sprint
