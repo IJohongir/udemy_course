@@ -2,7 +2,6 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from udemy_course.handlers.users.Spirnt import INsprint
 from keyboards.default import markupmenu, markupSprint
 from states.Scrum import ReTasks
 from utils.db_api import Database
