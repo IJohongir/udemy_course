@@ -6,8 +6,8 @@ from loader import dp
 from keyboards.default import markupmenu
 from states import ReScrum
 
-from udemy_course.handlers.users.Admin import admin
-from udemy_course.utils.db_api import Database
+
+from utils.db_api import Database
 
 db = Database()
 
